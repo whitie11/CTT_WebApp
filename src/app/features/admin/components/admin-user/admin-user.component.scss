@@ -1,0 +1,28 @@
+:host {
+    display: grid;
+   /* align-items: center;
+   justify-items: center; */
+   place-items: center;
+  }
+  
+  
+  .login-card {
+    width: 200px;
+    margin-top: 20px;
+    }
+
+    .title {
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
+
+    .btn-group button {
+      padding: 10px 24px; /* Some padding */
+      cursor: pointer; /* Pointer/hand icon */
+      float: left; /* Float the buttons side by side */
+      margin: 10px;
+    }
+
+    .floatRight {
+      float: right;
+    }

@@ -1,0 +1,27 @@
+<div  *ngIf="isAuthenticated$ | async">
+<mat-toolbar color="primary" class="noMargin">
+	<mat-toolbar-row>
+      <!-- <img src= "../../assets/img/shieldLogoA.png"  > -->
+		<h1>CTT</h1>
+		<span class="menu-spacer"></span>
+		<div>
+			<!-- <a mat-button [routerLink]="'/login'"> Login </a> -->
+			<a mat-button [routerLink]="'/home'"> Home Page </a>
+		    <a mat-button [routerLink]="'/dashboard'"> Dashboard</a>
+			<a mat-button [routerLink]="'/diaries'"> Diaries</a>
+			<a mat-button [routerLink]="'/readmessages'"> Messages </a>
+			<a mat-button [routerLink]="'/patients'"> Manage Patients </a>
+			<a mat-button [routerLink]="'/managereferrals'"> Referrals </a>
+			<a mat-button [routerLink]="'/admin'"> Admin </a> 
+		</div>
+
+
+		<span class= "userText">Current user: {{username$ | async}} </span>
+		<span class="menu-spacer"></span>
+		<div>
+			<button mat-raised-button color="warn" (click)="LogOut()">Logout</button>
+		</div>
+	</mat-toolbar-row>
+
+</mat-toolbar>
+</div>

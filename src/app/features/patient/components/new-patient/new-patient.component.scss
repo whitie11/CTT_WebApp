@@ -1,0 +1,47 @@
+// .my-form {
+//     max-height: 500px;
+//     overflow-y: auto;
+// }
+
+.newPt-card {
+  margin:10px;
+    width: 600px;
+    height: 550px;
+    overflow-y: auto;
+}
+
+mat-form-field {
+  width: 90%;
+  padding-top: 10px;
+}
+
+mat-grid-list {
+  height: 430px;
+  overflow-y: auto;
+}
+
+.notes {
+  max-height: 350px;
+  height:100px;
+  overflow-y: auto;
+}
+
+.notesField {
+    align-self: start;
+  justify-self: start;
+  max-height: 320px;
+  overflow-y: auto;
+ 
+}
+
+.btn-group  {
+  display: flex;
+  justify-content: flex-end !important;
+  width: 100%;
+}
+
+.btn-group button {
+ margin-right: 10px;
+}
+
+

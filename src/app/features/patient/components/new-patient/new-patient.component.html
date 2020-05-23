@@ -1,0 +1,76 @@
+<div >
+
+   <mat-card class="newPt-card">
+     <form [formGroup]="ptForm" (ngSubmit)="save(ptForm.value)" autocomplete="off">
+
+     <mat-grid-list cols="3" rows="11" rowHeight="45px" >
+       <mat-card-content>
+
+         <mat-grid-tile colspan="3" rowspan="1">
+           <mat-toolbar color="accent">
+           <span>New Patient Form</span>
+          </mat-toolbar>
+         </mat-grid-tile>
+
+         <mat-grid-tile rowspan="10" >
+          <div fxLayout="column">
+
+            <mat-form-field class="full-width">
+              <mat-label>First Name</mat-label>
+              <input type="text" matInput placeholder="First Name?" formControlName="firstName">
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <mat-label>Last Name</mat-label>
+              <input type="text" matInput placeholder="Last Name?" formControlName="lastName">
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <mat-label>Date of Birth</mat-label>
+              <input type="date" matInput placeholder="Date of Birth?" formControlName="dob">
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <mat-label>NHS no.</mat-label>
+              <input type="text" matInput placeholder="NHS number?" formControlName="nhsNo">
+            </mat-form-field>
+
+            <!-- <mat-form-field class="full-width">
+              <mat-label>CPMS no.</mat-label>
+              <input type="text" matInput placeholder="CPMS no?" formControlName="cpmsNo">
+            </mat-form-field> -->
+
+            <mat-form-field class="full-width">
+              <mat-label>Locality</mat-label>
+              <mat-select formControlName="localityId" >
+                <mat-option *ngFor="let l of localities$ | async" [value]="l.localityId" >
+                  {{l.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+        </mat-grid-tile>
+
+         <mat-grid-tile colspan="2" rowspan="8" >
+          <mat-form-field class="notesField">
+            <mat-label>Additional Information</mat-label>
+            <textarea class="notes" matInput placeholder="Comments" formControlName="notes" min-height="300px"></textarea>
+          </mat-form-field>
+         </mat-grid-tile>
+
+
+         <mat-grid-tile colspan="2" rowspan="2"  >
+           <div class="btn-group">
+         <button mat-raised-button color="primary" type="button" (click)="cancel()">Cancel</button>
+         <button mat-raised-button color="primary" type="submit" class="floatRight" [disabled]="!ptForm.valid">Save</button>
+         </div>
+        </mat-grid-tile>
+
+
+       </mat-card-content>
+     </mat-grid-list>
+      </form>
+   </mat-card>
+
+</div>

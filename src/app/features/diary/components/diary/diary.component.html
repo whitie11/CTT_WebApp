@@ -1,0 +1,148 @@
+<div class="diaryMenuBar"> <span class="diaryControlsTitle" >Diary page</span> 
+
+<span class="diaryControls">
+  <button mat-mini-fab color="primary" aria-label="Refresh icon button" (click)="loadDiary()">
+  <mat-icon>refresh</mat-icon>
+</button>
+</span>
+
+
+  <mat-form-field class="diaryControls" [ngStyle]="{'width': '200px'}"   >
+  <mat-label>Choose a Clinic Location</mat-label>
+  <mat-select [ngStyle]="{'width': '200px'}" [(ngModel)]="selectedClinicId" (selectionChange)="controlChange()" >
+    <mat-option *ngFor="let c of clinics" [value]="c.clinicId" >
+      {{c.clinicName}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+
+<mat-form-field class="diaryControls">
+  <input  
+   matInput [matDatepicker]="picker" disabled 
+   placeholder="Choose a date"
+   [(ngModel)]="date"
+   (ngModelChange)="controlChange()" >
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker [startAt]="date" #picker disabled="false"></mat-datepicker>
+</mat-form-field>
+
+<mat-checkbox class="diaryControls" 
+color="primary"
+labelPosition="before" 
+(change)="showCols()" 
+[(ngModel)] = "setB">
+Clinic B
+</mat-checkbox>
+
+<mat-checkbox class="diaryControls" color="primary"
+labelPosition="before" (change)="showCols()" [(ngModel)] = "setC">Clinic C</mat-checkbox>
+
+<div *ngIf="loading$ | async">
+  <mat-spinner style="margin:0 auto;" ></mat-spinner>
+</div>
+
+
+
+<div class="mat-elevation-z8" >
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- time Column -->
+    <ng-container matColumnDef="Time">
+      <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'background-color':'#efe5fd'}">Time</th>
+      <td class="table-row" mat-cell *matCellDef="let row" [ngStyle]="{'background-color':'#efe5fd'}">{{row.timeSlot.slot}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name1">
+      <th mat-header-cell *matHeaderCellDef [ngStyle]="{'background-color':'#efe5fd'}">Name</th>
+      <td class="table-row" mat-cell *matCellDef="let row"
+      [ngStyle]="setStyleA(row)"
+      matTooltip={{row?.setA?.notes}}
+      matTooltipPosition="right"
+      matTooltipDisabled={{showToolTipA(row)}}
+      (click)="showEdit(row?.setA,'A',row.timeSlot)"
+      >
+      {{row.setA?.patientName}}
+      </td>
+    </ng-container>
+
+    <!-- Reason Column -->
+    <ng-container matColumnDef="Reason1">
+      <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'background-color':'#efe5fd'}">Reason</th>
+      <td class="table-row" mat-cell *matCellDef="let row"
+      [ngStyle]="{'background-color':'#efe5fd'}">{{row.setA?.reason}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name2">
+      <th mat-header-cell *matHeaderCellDef [ngStyle]="{'background-color':'#e3f2fd'}">Name</th>
+      <td class="table-row" mat-cell *matCellDef="let row"
+      [ngStyle]="setStyleB(row)"
+      matTooltip={{row?.setB?.notes}}
+      matTooltipPosition="right"
+      matTooltipDisabled={{showToolTipB(row)}}
+      (click)="showEdit(row?.setB,'B',row.timeSlot)"
+      >
+      {{row.setB?.patientName}}</td>
+    </ng-container>
+
+    <!-- Reason Column -->
+    <ng-container matColumnDef="Reason2">
+      <th mat-header-cell *matHeaderCellDef [ngStyle]="{'background-color':'#e3f2fd'}">Reason</th>
+      <td  class="table-row" mat-cell *matCellDef="let row" [ngStyle]="{'background-color':'#e3f2fd'}">
+        {{row.setB?.reason}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name3">
+      <th mat-header-cell *matHeaderCellDef [ngStyle]="{'background-color':'#ffebee'}">Name</th>
+      <td  class="table-row" mat-cell *matCellDef="let row"
+      [ngStyle]="setStyleC(row)"
+      matTooltip={{row?.setC?.notes}}
+      matTooltipPosition="right"
+      matTooltipDisabled={{showToolTipC(row)}}
+      (click)="showEdit(row?.setC,'C',row.timeSlot)"
+      >
+      {{row.setC?.patientName}}</td>
+    </ng-container>
+
+    <!-- Reason Column -->
+    <ng-container matColumnDef="Reason3" >
+      <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'background-color':'#ffebee'}">Reason</th>
+      <td  class="table-row" mat-cell *matCellDef="let row" [ngStyle]="{'background-color':'#ffebee'}">{{row.setC?.reason}}</td>
+    </ng-container>
+
+    <!-- Header row time group -->
+    <ng-container matColumnDef="header-row-time-group">
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="1" [ngStyle]="{'background-color':'#efe5fd'}">
+       
+      </th>
+    </ng-container>
+
+    <!-- Header row first group -->
+    <ng-container matColumnDef="header-row-first-group">
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="2" [ngStyle]="{'background-color':'#efe5fd'}">
+        Clinic A
+      </th>
+    </ng-container>
+
+    <!-- Header row second group -->
+    <ng-container matColumnDef="header-row-second-group">
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="2" [ngStyle]="{'background-color':'#e3f2fd'}"> Clinic B </th>
+    </ng-container>
+
+    <!-- Header row third group -->
+    <ng-container matColumnDef="header-row-third-group">
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="2" [ngStyle]="{'background-color':'#ffebee'}"> Clinic C</th>
+    </ng-container>
+
+    <tr mat-header-row
+      *matHeaderRowDef="displayedHeaders sticky: true">
+    </tr>
+
+    <tr class="table-row" mat-header-row *matHeaderRowDef="displayedColumns sticky: true "></tr>
+    <tr class="table-row" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+

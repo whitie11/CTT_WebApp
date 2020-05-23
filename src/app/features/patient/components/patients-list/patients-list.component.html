@@ -1,0 +1,81 @@
+
+<!-- <pre>{{ state$ | async | json }}</pre> -->
+
+<div style="padding-left: 10px; padding-right: 10px;" ><span>
+  <mat-form-field fxFlex="80%">
+    <input matInput type="text" [value]="filter" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</span>
+
+<!-- <div *ngIf="loading$ | async">
+       <mat-spinner style="margin:0 auto;" ></mat-spinner>
+     </div> -->
+
+<div class="mat-elevation-z8">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.patientId}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+      <td mat-cell *matCellDef="let row">{{row.firstName}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+      <td mat-cell *matCellDef="let row">{{row.lastName}}</td>
+    </ng-container>
+
+     <!-- dob Column -->
+     <ng-container matColumnDef="dob" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date of Birth</th>
+        <td mat-cell *matCellDef="let row">{{row.dob | date: 'dd/MM/yyyy'}}</td>
+      </ng-container>
+
+       <!-- nhsNo Column -->
+    <ng-container matColumnDef="nhsNo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>NHS no.</th>
+        <td mat-cell *matCellDef="let row">{{row.nhsNo}}</td>
+      </ng-container>
+
+             <!-- cpmsNo Column -->
+    <ng-container matColumnDef="cpmsNo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>CPMS no.</th>
+      <td mat-cell *matCellDef="let row">{{row.cpmsNo}}</td>
+    </ng-container>
+
+       <!-- notes Column -->
+       <ng-container matColumnDef="notes">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Notes</th>
+        <td mat-cell *matCellDef="let row">{{row.notes}}</td>
+      </ng-container>
+
+             <!-- isOpen Column -->
+    <ng-container matColumnDef="isOpen">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Open</th>
+      <td mat-cell *matCellDef="let row">{{row.isOpen}}</td>
+    </ng-container>
+
+           <!-- locality Column -->
+           <ng-container matColumnDef="locality">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Locality</th>
+            <td mat-cell *matCellDef="let row">{{row.locality.name}}</td>
+          </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="'./editPt'" [state]="{ data: row }"></tr>
+  </table>
+
+  <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="5"
+    [pageSizeOptions]="[5,10,20]">
+  </mat-paginator>
+
+</div>
+<a mat-button [routerLink]="'./newPt'"> Add New Patient</a>
+</div>
+

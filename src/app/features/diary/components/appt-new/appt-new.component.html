@@ -1,0 +1,60 @@
+<div>
+  <form class="form" [formGroup]="apptForm" (ngSubmit)="save(apptForm.value)" autocomplete="off">
+    <mat-grid-list cols="3" rows="7" rowHeight="45px">
+
+      <mat-card class="newPt-card">
+        <mat-card-content>
+
+          <mat-grid-tile colspan="3" rowspan="2">
+            <mat-toolbar color="accent">
+              <span>New Appointment Form</span>
+            </mat-toolbar>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="3" rowspan="1">
+            Selected Clinic: {{selectedClinic}} {{dateStr}} {{timeStr}}
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="3">
+            <div fxLayout="column">
+            <mat-form-field class="full-width">
+              <mat-label>Select Patient</mat-label>
+              <mat-select formControlName="patientId">
+                <mat-option *ngFor="let c of clinicList" [value]="c.ptId">
+                  {{c.ptName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <mat-label>Appointment Reason</mat-label>
+              <mat-select formControlName="typeId">
+                <mat-option *ngFor="let t of apptType" [value]="t.typeId">
+                  {{t.typeText}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="2" rowspan="5">
+            <mat-form-field class="notesField">
+              <mat-label>Additional Information</mat-label>
+              <textarea class="notes" matInput placeholder="Comments" formControlName="notes"
+                min-height="300px"></textarea>
+            </mat-form-field>
+
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="3" rowspan="1">
+            <div class="btn-group">
+              <button mat-raised-button color="primary" type="button" (click)="cancel()">Cancel</button>
+              <button mat-raised-button color="primary" type="submit" [disabled]="!apptForm.valid">Save</button>
+            </div>
+          </mat-grid-tile>
+
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-list>
+  </form>
+</div>

@@ -1,0 +1,40 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="false"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="((isHandset$ | async) === false && (isAuthenticated$ | async))"
+      >
+    <mat-toolbar color="primary" >Menu</mat-toolbar>
+    <mat-nav-list class="menuitem">
+      <a mat-button class="menuitem" [routerLink]="'/home'" [routerLinkActive]="['is-active']"> Home Page </a>
+		  <a mat-button class="menuitem" [routerLink]="'/dashboard'" [routerLinkActive]="['is-active']"> Dashboard</a>
+			<a mat-button class="menuitem" [routerLink]="'/diaries'" [routerLinkActive]="['is-active']"> Diaries</a>
+			<a mat-button class="menuitem" [routerLink]="'/readmessages'" [routerLinkActive]="['is-active']"> Messages </a>
+			<a mat-button class="menuitem" [routerLink]="'/patients'" [routerLinkActive]="['is-active']"> Manage Patients </a>
+			<a mat-button class="menuitem" [routerLink]="'/managereferrals'" [routerLinkActive]="['is-active']"> Referrals </a>
+			<a mat-button class="menuitem" [routerLink]="'/admin'" [routerLinkActive]="['is-active']"> Admin </a> 
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>CTT Web-App</span>
+      <span class="spacer"></span>
+      <div *ngIf="(isAuthenticated$ | async)">
+      <span class= "userText">
+        Current user: {{username$ | async}}
+      </span>
+        <button mat-raised-button color="warn" (click)="LogOut()">Logout</button>
+      </div> 
+  </mat-toolbar>
+    <!-- Add Content Here -->
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

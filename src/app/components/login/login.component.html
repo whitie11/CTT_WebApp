@@ -1,0 +1,41 @@
+<div class="title"> 
+	<h1>Clinical Treatment Team</h1>
+<h3>Referral Management Application</h3>
+</div>
+<div class="btn-group">
+<button mat-raised-button color="primary" (click)="enableLogin()" [routerLink]="'/referral'" >Make Referral</button>
+<button mat-raised-button color="primary" (click)="enableLogin()" [routerLink]="'/message'" >Message Team</button>
+<button mat-raised-button color="primary" (click)="enableLogin()"  >Login</button>
+</div>
+<mat-card class="login-card" *ngIf="showLogin">
+	<mat-card-content>
+		<mat-toolbar>
+			<span>LOGIN </span>
+		</mat-toolbar>
+		
+		<form [formGroup]="formdata" class="my-form" (ngSubmit)="login()" >
+
+			<mat-form-field class="full-width">
+				<mat-label>User Name</mat-label>
+				<input type="text" matInput  placeholder="User Name?" formControlName="username">
+         </mat-form-field>
+				<mat-form-field class="full-width">
+					<mat-label>Password</mat-label>
+					<input type="password" matInput  placeholder="Password?"  formControlName="password" autocomplete="nope" >
+         </mat-form-field>
+					<button mat-raised-button color="primary" type="submit"  [disabled]="!formdata.valid">Login</button>
+
+	  </form>
+	  <!-- <div *ngIf="errorMessage">
+		<div class="alert alert-danger" role="alert">
+		  {{errorMessage}}
+		</div>
+	  </div> -->
+	</mat-card-content>
+	<!-- <mat-card-actions>
+      <button mat-raised-button (click)="login()" color="primary">LOGIN</button>
+   </mat-card-actions> -->
+</mat-card>
+<div *ngIf="waiting$ | async">
+    <mat-spinner style="margin:0 auto;" ></mat-spinner>
+  </div>

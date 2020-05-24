@@ -17,6 +17,12 @@ export class DiaryService {
 
   constructor(private http: HttpClient) { }
 
+  public  getAppt(id: number)  {
+    const url = this.api + id ;
+    const result = this.http.get(url);
+    return  result;
+  }
+
   public  getDiaryPage(data: DiaryReqDTO) {
     const url = this.api + 'getDiaryPage' ;
     const result = this.http.post<DiaryRow[]>(url, data);

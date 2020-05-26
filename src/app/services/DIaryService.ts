@@ -19,7 +19,7 @@ export class DiaryService {
 
   public  getAppt(id: number)  {
     const url = this.api + id ;
-    const result = this.http.get(url);
+    const result = this.http.get(url, { withCredentials: true});
     return  result;
   }
 

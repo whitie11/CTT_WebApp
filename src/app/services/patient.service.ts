@@ -29,7 +29,11 @@ export class PatientService {
   }
 
 
-
+  public getById(id: number): Observable<Patient> {
+    const url = this.api + 'getById/' + id;
+    const result = this.http.get<Patient>(url);
+    return result;
+  }
 
   public getAllPts(): Observable<Patient[]> {
     const url = this.api + 'getAll';

@@ -4,7 +4,7 @@ import { TimeSlot } from './diaryListItem';
 export interface Appt{
     apptId: number;
     date: Date;
-    timeSlot: string;
+    timeSlotText: string;
     timeSlotId: number;
     clinicId: number;
     notes: string;
@@ -12,5 +12,6 @@ export interface Appt{
     stageId: number;
     typeId: number;
     clinicGroup: string;
+    timeSlot: TimeSlot;
     }
 

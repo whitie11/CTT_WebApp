@@ -1,4 +1,21 @@
 
+<div *ngIf="!apptLoaded; else formShow">
+    <mat-spinner style="margin:0 auto;" ></mat-spinner>
+  </div>
+
+  <ng-template #formShow>
+  <mat-card class="newPt-card">
+    <mat-card-content>
+        <mat-toolbar color="accent">
+            <span>Manage Appointment; {{currentPatient.firstName}} {{currentPatient.lastName}}
+               ( {{currentAppt.date | date : 'EEE, MMMM d, y'}} {{currentAppt.timeSlot.slot}} )
+            </span>
+          </mat-toolbar>
+    </mat-card-content>
+  </mat-card>
+  </ng-template>
+
+
 <p>This page will be used to</p><ul>
     <li>cancel</li>
 <li>reschedule</li>

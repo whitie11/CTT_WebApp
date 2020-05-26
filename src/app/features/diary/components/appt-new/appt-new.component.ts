@@ -60,7 +60,7 @@ export class ApptNewComponent implements OnInit {
     const cl = this.clinics.find(c => c.clinicId === this.state.clinicId);
     this.selectedClinic = cl.clinicName + '(' + this.state.clinicGroup + ')';
     this.dateStr = this.getDateString(this.state.date);
-    this.timeStr = this.state.timeSlot;
+    this.timeStr = this.state.timeSlotText;
   }
 
   getDateString(date: Date) {

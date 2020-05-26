@@ -281,14 +281,15 @@ export class DiaryComponent implements OnInit {
       const newAppt: Appt = {
         apptId: 0,
         date: this.date,
-        timeSlot: ts.slot,
+        timeSlotText: ts.slot,
         timeSlotId: ts.timeSlotId,
         clinicId: this.selectedClinicId,
         notes: '',
         patientId: 0,
         stageId: 0,
         typeId: 0,
-        clinicGroup: group
+        clinicGroup: group,
+        timeSlot: null
       };
 
       this.router.navigateByUrl('/diaries/appt_new', { state: { appt: newAppt } });

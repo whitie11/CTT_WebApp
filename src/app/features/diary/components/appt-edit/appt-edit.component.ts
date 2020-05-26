@@ -9,6 +9,7 @@ import { ListService } from '@app/services/list.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Appt } from '@app/models/appt';
 import { Observable } from 'rxjs';
+import { Patient } from '@app/models/patient';
 
 @Component({
   selector: 'app-appt-edit',
@@ -19,9 +20,12 @@ export class ApptEditComponent implements OnInit {
 
   currentApptId: number;
   currentAppt$: any;
-  currentAppt: any;
+  currentAppt: Appt;
+  currentPatient: Patient;
   activatedRoute: any;
   apptForm: FormGroup;
+
+  apptLoaded = false;
 
   constructor(
     private router: Router,
@@ -33,16 +37,16 @@ export class ApptEditComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.currentApptId = this.router.getCurrentNavigation().extras.state.apptId;
-
   }
 
   ngOnInit(): void {
     this.currentAppt$ = this.diaryService.getAppt(this.currentApptId);
     this.currentAppt$.subscribe(a => {
       this.currentAppt = a;
-      console.log('currentAppt ' + this.currentAppt);
-     });
-
+      console.log('currentAppt ' + JSON.stringify(this.currentAppt));
+      this.apptLoaded = true;
+      this.currentPatient = a.patient;
+    });
   }
 
 }
